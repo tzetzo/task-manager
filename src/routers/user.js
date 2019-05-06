@@ -4,7 +4,7 @@ const sharp = require("sharp");
 const User = require("../models/user");
 const router = new express.Router();
 const auth = require("../middleware/auth");
-const { sendWelcomeEmail, sendCancelationEmail } = require("../emails/account");
+const { sendWelcomeEmail, sendCancelationEmail } = require("../emails/account"); //object destructuring
 
 //public path accessible by everyone;
 // Create a user; Sign up user;
