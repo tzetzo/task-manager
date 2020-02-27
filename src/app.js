@@ -1,8 +1,8 @@
 //we have our express app in separate file so we can use it with our tests as well
 const express = require("express");
-require("./db/mongoose");
-const userRouter = require("./routers/user");
-const taskRouter = require("./routers/task");
+require("./db/mongoose"); //connection to MongoDB Server is established
+const userRouter = require("./routers/user"); //endpoint for users
+const taskRouter = require("./routers/task"); //endpoints for tasks
 
 const app = express();
 // const port = process.env.PORT;
@@ -14,7 +14,7 @@ const app = express();
 // });
 
 app.use(express.json()); //parses the req.body JSON into object inside our path handlers
-app.use(userRouter); //use these routes; alternative app.use("/api", require("./routers/user"));
-app.use(taskRouter); //use these routes
+app.use(userRouter); //use these endpoints; alternative app.use("/api", require("./routers/user"));
+app.use(taskRouter); //use these endpoints
 
 module.exports = app;
