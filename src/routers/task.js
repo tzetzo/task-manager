@@ -75,7 +75,7 @@ router.get("/tasks/:id", auth, async (req, res) => {
 router.patch("/tasks/:id", auth, async (req, res) => {
   //first validate user input by checking if only valid properties are received
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["description", "completed"];
+  const allowedUpdates = ["description", "completed"]; //verify fields exist in /models/task
   const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );

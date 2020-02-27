@@ -91,7 +91,7 @@ router.get("/users/me", auth, async (req, res) => {
 router.patch("/users/me", auth, async (req, res) => {
   //first validate user input by checking if only valid properties are received
   const updates = Object.keys(req.body);
-  const allowedUpdates = ["name", "email", "password", "age"];
+  const allowedUpdates = ["name", "email", "password", "age"]; //verify fields exist in /models/user
   const isValidOperation = updates.every(update =>
     allowedUpdates.includes(update)
   );
