@@ -101,7 +101,7 @@ router.patch("/users/me", auth, async (req, res) => {
   }
 
   try {
-    //update user fields
+    //update provided by user fields; keep the rest like _id and the not provided:
     updates.forEach(update => (req.user[update] = req.body[update]));
     //save the user; that way Mongoose middleware 'userSchema.pre("save",...)' is auto used
     await req.user.save();

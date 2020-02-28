@@ -81,7 +81,9 @@ userSchema.methods.generateAuthToken = async function() {
   return token;
 };
 
-//define custom model method findByCredentials:
+//define custom schema method findByCredentials;
+//accessed directly through User.findByCredentials()
+//Login User
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -95,7 +97,8 @@ userSchema.statics.findByCredentials = async (email, password) => {
 };
 
 //Hash the plain text password before saving;
-//mongoose middleware; executed each time before 'user.save()' is used(12.3 lesson):
+//mongoose middleware; executed each time before 'user.save()' is used(12.3 lesson);
+//SignUp User & Update user password
 userSchema.pre("save", async function(next) {
   const user = this; //this refers to individual document
 
