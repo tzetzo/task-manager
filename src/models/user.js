@@ -48,15 +48,15 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//virtual field "tasks" for the User model; not stored in DB; accessed as user.tasks (12.13 lesson)
+//virtual field "tasks"; used to get all tasks for the user; not stored in DB; accessed as user.tasks (12.13 lesson)
 userSchema.virtual("tasks", {
   ref: "Task",
   localField: "_id",
   foreignField: "owner"
 });
 
-//12.11 lesson; auto remove password & tokens from the response;
-//mongoose toJSON() is auto called on the user object every time res.send(user) is used(JSON.stringify is used)
+//auto remove password & tokens from the response; 12.11 lesson;
+//mongoose toJSON() is auto called on the user object every time res.send() is used(JSON.stringify is used)
 userSchema.methods.toJSON = function() {
   const user = this;
 

@@ -14,7 +14,7 @@ const auth = async (req, res, next) => {
       throw new Error(); //fires the catch block
     }
 
-    req.token = token;
+    req.token = token; //used in the /users/logout endpoint to delete this specific token
     req.user = user; //save the user in the req object so that the request handler doesnt have to fetch the user again
     next();
   } catch (error) {

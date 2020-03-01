@@ -70,8 +70,8 @@ router.get("/users/me", auth, async (req, res) => {
   res.send(req.user);
 });
 
-// //Read specific user:
-//NOT TO BE USED; SHOULDNT BE ABLE TO GET USERS BY THEIR ID;
+// Read specific user:
+// NOT TO BE USED; SHOULDNT BE ABLE TO GET USERS BY THEIR ID; 12.12 lesson
 // router.get("/users/:id", async (req, res) => {
 //   // console.log(req.params.id);
 //   try {
@@ -87,7 +87,7 @@ router.get("/users/me", auth, async (req, res) => {
 //   }
 // });
 
-//Update specific user:
+//Allow user to update his own user only:
 router.patch("/users/me", auth, async (req, res) => {
   //first validate user input by checking if only valid properties are received
   const updates = Object.keys(req.body);
@@ -112,7 +112,7 @@ router.patch("/users/me", auth, async (req, res) => {
   }
 });
 
-//Delete specific user:
+//Allow user to delete his own user only:
 router.delete("/users/me", auth, async (req, res) => {
   try {
     await req.user.remove(); //same as req.user.save() but deletes the user from MongoDB
