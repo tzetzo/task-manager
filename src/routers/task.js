@@ -21,7 +21,7 @@ router.post("/tasks", auth, async (req, res) => {
 //GET /tasks?completed=true
 //GET /tasks?limit=10&skip=20
 //GET /tasks?sortBy=createdAt_asc //OR desc
-//Read all tasks
+//Read all tasks for current user
 router.get("/tasks", auth, async (req, res) => {
   const match = {};
   const sort = {};
@@ -36,6 +36,7 @@ router.get("/tasks", auth, async (req, res) => {
   }
 
   try {
+    // const tasks = await Task.find({owner:req.user._id})
     await req.user
       .populate({
         path: "tasks",

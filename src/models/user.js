@@ -112,7 +112,7 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
-//delete user tasks when user is removed;
+//delete user tasks when user is deleted;
 //mongoose middleware; executed each time before 'user.remove()' is used (12.15 lesson)
 userSchema.pre("remove", async function(next) {
   const user = this;
