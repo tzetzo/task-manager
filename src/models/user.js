@@ -70,10 +70,12 @@ userSchema.methods.toJSON = function() {
 };
 
 //define custom instance method for JWT creation; cant be arrow function!
+//accessed directly through user.generateAuthToken()
+//SignUp & SignIn user endpoints use it
 userSchema.methods.generateAuthToken = async function() {
   const user = this;
   //create the JWT:
-  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET);
+  const token = jwt.sign({ _id: user._id.toString() }, process.env.JWT_SECRET); //{expiresIn: '7 days'} as third parameter
   //add the JWT to the user tokens field
   user.tokens = user.tokens.concat({ token });
   //save the user with the new token to DB:
@@ -81,9 +83,9 @@ userSchema.methods.generateAuthToken = async function() {
   return token;
 };
 
-//define custom schema method findByCredentials;
+//define custom model method findByCredentials;
 //accessed directly through User.findByCredentials()
-//Login User
+//SignIn user endpoint uses it
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email });
   if (!user) {
@@ -98,7 +100,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
 
 //Hash the plain text password before saving;
 //mongoose middleware; executed each time before 'user.save()' is used(12.3 lesson);
-//SignUp User & Update user password
+//SignUp user & Update user password endpoints use it
 userSchema.pre("save", async function(next) {
   const user = this; //this refers to individual document
 

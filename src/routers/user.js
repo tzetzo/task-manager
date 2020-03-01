@@ -7,7 +7,7 @@ const auth = require("../middleware/auth");
 const { sendWelcomeEmail, sendCancelationEmail } = require("../emails/account"); //object destructuring
 
 //public path accessible by everyone;
-// Create a user; Sign up user;
+// SignUp user
 router.post("/users", async (req, res) => {
   //req.body accessible thanks to app.use(express.json());
 
@@ -25,7 +25,7 @@ router.post("/users", async (req, res) => {
 });
 
 //public path accessible by everyone;
-// Login user
+// SignIn user
 router.post("/users/login", async (req, res) => {
   try {
     const user = await User.findByCredentials(
@@ -65,7 +65,7 @@ router.post("/users/logoutAll", auth, async (req, res) => {
   }
 });
 
-//Read all users; use express middleware for authentication with JWT
+//Read my own user; use express middleware for authentication with JWT
 router.get("/users/me", auth, async (req, res) => {
   res.send(req.user);
 });
