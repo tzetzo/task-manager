@@ -155,6 +155,7 @@ router.post(
   },
   (error, req, res, next) => {
     //error callback
+    //the 4 arguments should be listed so express knows this is Error handler!
     res.status(400).send({ error: error.message });
   }
 );

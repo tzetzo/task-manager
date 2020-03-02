@@ -55,7 +55,7 @@ userSchema.virtual("tasks", {
   foreignField: "owner"
 });
 
-//auto remove password & tokens from the response; 12.11 lesson;
+//auto remove password, tokens & avatar (binary data) from the response; 12.11 lesson;
 //mongoose toJSON() is auto called on the user object every time res.send() is used(JSON.stringify is used)
 userSchema.methods.toJSON = function() {
   const user = this;
