@@ -26,6 +26,7 @@ router.get("/tasks", auth, async (req, res) => {
   const match = {};
   const sort = {};
 
+  //check if completed query string was provided with the request and set match.completed
   if (req.query.completed) {
     match.completed = req.query.completed === "true";
   }
@@ -36,7 +37,12 @@ router.get("/tasks", auth, async (req, res) => {
   }
 
   try {
-    // const tasks = await Task.find({owner:req.user._id})
+    // const tasks = await Task.find({ owner: req.user._id, ...match }, null, {
+    //   limit: parseInt(req.query.limit),
+    //   skip: parseInt(req.query.skip),
+    //   sort
+    // });
+    // res.send(tasks);
     await req.user
       .populate({
         path: "tasks",
